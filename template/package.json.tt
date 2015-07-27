@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "$(npm bin)/webpack-dev-server --hot"
+    "start": "$(npm bin)/gulp"
   },
   "dependencies": {
     "babel-core": "~5.5.8",
