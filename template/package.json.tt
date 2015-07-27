@@ -1,6 +1,7 @@
 {
   "name": "<%= Rails.application.class.parent_name %>",
   "version": "0.0.0",
+  "private": true,
   "scripts": {
     "start": "$(npm bin)/webpack-dev-server --hot"
   },
@@ -25,5 +26,5 @@
     "webpack-dev-server": "^1.10.1",
     "webpack-stream": "^2.0.0",
     "react-hot-loader": "^1.2.8"
-  },
+  }
 }
