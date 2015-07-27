@@ -9,12 +9,12 @@ Gem::Specification.new do |s|
   s.version     = GulpAssets::VERSION
   s.authors     = ["Jan Varwig"]
   s.email       = ["jan@varwig.org"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of GulpAssets."
-  s.description = "TODO: Description of GulpAssets."
+  s.homepage    = "http://jan.varwig.org/"
+  s.summary     = "Integrate Gulp with Rails"
+  s.description = "Integrate Gulp with Rails"
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
 
-  s.add_dependency "rails", "~> 4.2.3"
+  s.add_runtime_dependency "rails", ">= 3.0.0"
 end

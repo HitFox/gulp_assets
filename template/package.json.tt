@@ -1,0 +1,29 @@
+{
+  "name": "<%= Rails.application.class.parent_name %>",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "$(npm bin)/webpack-dev-server --hot"
+  },
+  "dependencies": {
+    "babel-core": "~5.5.8",
+    "babel-loader": "~5.1.4",
+    "gulp": "^3.9.0",
+    "gulp-fingerprint": "^0.3.2",
+    "gulp-livereload": "^3.8.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-rev": "^5.1.0",
+    "gulp-sass": "^2.0.3",
+    "gulp-util": "^3.0.6",
+    "jquery": "~2.1.4",
+    "lodash": "^3.9.3",
+    "node-libs-browser": "~0.5.2",
+    "react": "~0.13.3",
+    "redux": "~0.12.0",
+    "redux-promise-middleware": "0.0.1",
+    "run-sequence": "^1.1.2",
+    "webpack": "~1.9.11",
+    "webpack-dev-server": "^1.10.1",
+    "webpack-stream": "^2.0.0",
+    "react-hot-loader": "^1.2.8"
+  },
+}
