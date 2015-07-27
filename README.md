@@ -43,7 +43,7 @@ Compiles assets for production, hashes their names and generates a
 `rev-mainfest.json`, which is used by the `gulp_asset_path` helper to
 generate the correct links with the hash in the filename.
 
-## Referencing gulp asets from Rails views
+## Referencing gulp assets from Rails views
 
 The `gulp_assets_path` helper takes a partial path as a parameter that
 sits inside the `public/assets` folder. It then operates differently,
@@ -56,18 +56,37 @@ depending on the `RAILS_ENV`:
   the filename with the hashed version. `javascripts/main.js` would
   become `/assets/javascripts/main-a42bb48a5f83.js`.
 
+### Shortcuts
+
+To include a gulp-generated javascript or stylesheet, use the `gulp_javascript` or
+`gulp_stylesheet` helper:
+
+    <%= gulp_javascript "main" %>
+    <%= gulp_stylesheet "main" %>
+
+Since "main" is the default name, you can omit it:
+
+    <%= gulp_javascript %>
+    <%= gulp_stylesheet %>
+
+Both accept a second parameter for overwriting attributes. This can be
+used for example to change the `media` attribute for a stylesheet.
+
 ## Examples
 
-CSS:
+### CSS
  
  - `frontend/stylesheets/main.scss` Input file
  - `public/assets/stylesheets/main.css` Output File
  - `<link rel="stylesheet" media="all" href="<%=gulp_asset_path('stylesheets/main.css')%>"/>` Used to link to the file.
+ - `<%= gulp_stylesheet "main" %>` or `<%= gulp_stylesheet %>` also generate correct links
 
-JS: 
+### JS
+
  - `frontend/javscripts/main.js` Input file
  - `public/assets/javscripts/main.js` Output File
  -  `<script src="<%=gulp_asset_path('javascripts/main.js')%>"></script>`
+ - `<%= gulp_javascript "main" %>` or `<%= gulp_javascript %>` also generate correct links
 
 ## TODO
 
