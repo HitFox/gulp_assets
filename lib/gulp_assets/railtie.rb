@@ -18,5 +18,9 @@ module GulpAssets
     initializer "gulp_assets.view_helpers" do
       ActionView::Base.send :include, ViewHelpers
     end
+
+    rake_tasks do
+      load "tasks/gulp_assets_tasks.rake"
+    end
   end
 end

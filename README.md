@@ -94,15 +94,21 @@ used for example to change the `media` attribute for a stylesheet.
 - ~~Inject Gulp helper~~
 - ~~Configure webpack host~~
 - ~~Offer command to install gulp infrastructure into rails app~~
-- Hook into Assets:precompile
+- ~~Hook into Assets:precompile~~
 - Inject livereload/browsersync (https://github.com/Browsersync/recipes/tree/master/recipes/gulp.sass)
 - Generate procfile for Foreman
 - Overwrite asset_path to make this work with `javascript_include_tag`
   and `styleheet_link_tag`.
 - Include CORS in Rails for development if necessary.
+- Use npm install to generate package.json instead of using the
+  preconfigured dependencies. Can be used to ask if React should be
+  used or not.
+- Middleman support
+- Gemspec is incomplete
 
 ### Gulpfile Todo:
-- Make Hot loader dependency opional
+- Make Hot loader dependency opional (Move into task, so it can be dev
+  dependency)
 - Production Build Task
 - Config.js with host and port for webpack dev server (Also consumed by
   Rails plugin)
