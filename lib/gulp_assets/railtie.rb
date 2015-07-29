@@ -19,6 +19,13 @@ module GulpAssets
       ActionView::Base.send :include, ViewHelpers
     end
 
+    initializer "gulp_assets.livereload" do
+      if Rails.env.development?
+        require 'rack-livereload'
+        config.app_middleware.insert_after ActionDispatch::Static, Rack::LiveReload
+      end
+    end
+
     rake_tasks do
       load "tasks/gulp_assets_tasks.rake"
     end

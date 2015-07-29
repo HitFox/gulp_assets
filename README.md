@@ -3,6 +3,14 @@
 Rails Plugin to augment frontend development with a gulp/webpack based
 workflow.
 
+- Installs Javascript infrastructure in your Rails project to manage
+  frontend assets
+- Provides view helpers to Rails that allow you to easily reference
+  gulp generated assets from Rails views
+- Puts Livereload into the Rails middleware stack. This injects the
+  Livereload client into Rails-renderd pages, updates are triggered from
+  gulp.
+
 ## Usage
 
 1. Add `gem 'gulp_assets', git: 'git@github.com:HitFox/gulp_assets.git'` gem to your Gemfile and run `bundle install`.
@@ -95,16 +103,14 @@ used for example to change the `media` attribute for a stylesheet.
 - ~~Configure webpack host~~
 - ~~Offer command to install gulp infrastructure into rails app~~
 - ~~Hook into Assets:precompile~~
-- Inject livereload/browsersync (https://github.com/Browsersync/recipes/tree/master/recipes/gulp.sass)
-- Generate procfile for Foreman
-- Overwrite asset_path to make this work with `javascript_include_tag`
-  and `styleheet_link_tag`.
+- ~~Inject livereload~~
 - Include CORS in Rails for development if necessary.
 - Use npm install to generate package.json instead of using the
   preconfigured dependencies. Can be used to ask if React should be
   used or not.
 - Middleman support
 - Gemspec is incomplete
+- Generate initializer in config dir with instructions
 
 ### Gulpfile Todo:
 - Make Hot loader dependency opional (Move into task, so it can be dev
