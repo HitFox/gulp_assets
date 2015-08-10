@@ -21,6 +21,21 @@ var ASSET_FILES      = 'frontend/assets/**/*';
 var STYLESHEET_FILES = 'frontend/stylesheets/**/*.scss';
 var OUTPUT_FOLDER    = 'public/assets/';
 
+function lazyFingerPrint(){
+  return hasManifest() ? fingerprint(OUTPUT_FOLDER + 'rev-manifest.json', {prefix: '/'}) : gutil.noop();
+
+  function hasManifest(){
+    try {
+      require('./public/assets/rev-manifest.json');
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+}
+
+
+
 gulp.task('assets:development', function(){
   return gulp.src(ASSET_FILES, {base: BASE})
     .pipe(gulp.dest(OUTPUT_FOLDER))
@@ -51,7 +66,7 @@ gulp.task('css:production', function () {
   return gulp.src(STYLESHEET_FILES, {base: BASE})
     .pipe(sass()
        .on('error', sass.logError))
-    .pipe(fingerprint(OUTPUT_FOLDER + 'rev-manifest.json', {prefix: '/'}))
+    .pipe(lazyFingerPrint())
     .pipe(gulp.dest(OUTPUT_FOLDER))
     .pipe(rev())
     .pipe(gulp.dest(OUTPUT_FOLDER))
