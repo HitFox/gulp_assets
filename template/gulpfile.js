@@ -4,7 +4,7 @@ var sass        = require('gulp-sass');
 var gutil       = require('gulp-util');
 var livereload  = require('gulp-livereload');
 var rev         = require('gulp-rev');
-var fingerprint = require('gulp-fingerprint');
+var revReplace  = require('gulp-rev-replace');
 var stream      = require('webpack-stream');
 var rename      = require('gulp-rename');
 //var debug     = require('gulp-debug');
@@ -21,20 +21,10 @@ var ASSET_FILES      = 'frontend/assets/**/*';
 var STYLESHEET_FILES = 'frontend/stylesheets/**/*.scss';
 var OUTPUT_FOLDER    = 'public/assets/';
 
-function lazyFingerPrint(){
-  return hasManifest() ? fingerprint(OUTPUT_FOLDER + 'rev-manifest.json', {prefix: '/'}) : gutil.noop();
-
-  function hasManifest(){
-    try {
-      require('./public/assets/rev-manifest.json');
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
+function replace() {
+  var manifest = gulp.src(OUTPUT_FOLDER + 'rev-manifest.json');
+  return revReplace({manifest: manifest});
 }
-
-
 
 gulp.task('assets:development', function(){
   return gulp.src(ASSET_FILES, {base: BASE})
@@ -66,7 +56,7 @@ gulp.task('css:production', function () {
   return gulp.src(STYLESHEET_FILES, {base: BASE})
     .pipe(sass()
        .on('error', sass.logError))
-    .pipe(lazyFingerPrint())
+    .pipe(replace())
     .pipe(gulp.dest(OUTPUT_FOLDER))
     .pipe(rev())
     .pipe(gulp.dest(OUTPUT_FOLDER))
@@ -77,7 +67,7 @@ gulp.task('css:production', function () {
     .pipe(gulp.dest(OUTPUT_FOLDER));
 });
 
-gulp.task('javascript:production', function(){ //eslint-disable-line no-script-url
+gulp.task('javascript:production', function(){
   return gulp.src('frontend/javascripts/main.js', {base: 'frontend'})
     .pipe(stream(webpackConfig, webpack))
     .pipe(rename({dirname: 'javascripts'}))
@@ -113,7 +103,8 @@ gulp.task('precompile', function(cb){
   sequence(
     'assets:production',
     'css:production',
-    'javascript:production',//eslint-disable-line no-script-url
+    'javascript:production',
     cb
   );
 });
+
