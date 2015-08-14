@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   EOF
   s.license     = "MIT"
 
-  s.files = Dir["{lib,template}/**/*", "MIT-LICENSE", "README.md"]
+  s.files = Dir["{lib,template}/**/{.,}*", "MIT-LICENSE", "README.md"]
 
   s.add_runtime_dependency 'rails', '>= 3.1.0'
   s.add_runtime_dependency "rack-livereload", "~> 0.3.16"
