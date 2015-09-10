@@ -18,7 +18,8 @@ class GulpAssetsGenerator < Rails::Generators::Base
   end
 
   def create_module
-    template "package.json"
+    copy_file "package.json"
+    gsub_file 'package.json', "gulp-assets", Rails.application.class.parent_name
   end
 
   def install_dependencies

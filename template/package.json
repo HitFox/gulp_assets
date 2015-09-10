@@ -1,5 +1,5 @@
 {
-  "name": "<%= Rails.application.class.parent_name %>",
+  "name": "gulp-assets",
   "version": "0.0.0",
   "private": true,
   "scripts": {
