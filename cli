@@ -1,0 +1,46 @@
+#!/usr/bin/env ruby
+require "thor"
+
+class CLI < Thor
+  include Thor::Actions
+  source_root File.expand_path('../template', __FILE__)
+
+  desc "create_testapp", "Create TestApp"
+  def create_testapp *args
+    run "rails new testapp -O -G -T --skip-turbolinks"
+    source_files = Dir['template/*'].map {|file| File.basename(file) } + ["node_modules"]
+    inside "testapp" do
+      append_to_file "Gemfile", "gem 'gulp_assets', path: '..'"
+      run "bundle install"
+      source_files.each do |file|
+        create_link file, File.join("..", "template", file)
+      end
+
+      insert_into_file 'app/views/layouts/application.html.erb', after: /javascript_include_tag.*\n/ do
+        "  <%= gulp_stylesheet %>\n" +
+        "  <%= gulp_javascript %>\n"
+      end
+      
+      create_file "config/routes.rb" do
+        "Rails.application.routes.draw do\n" +
+        "  root 'application#index'\n" +
+        "end"
+      end
+
+      create_file "app/controllers/application_controller.rb" do
+        "class ApplicationController < ActionController::Base\n" +
+        "  protect_from_forgery with: :exception\n" +
+        "  def index\n" +
+        "  end\n" +
+        "end"
+      end
+
+      create_file "app/views/application/index.html.erb"
+    end
+    inside "template" do
+      run "npm install"
+    end
+  end
+end
+
+CLI.start(ARGV)
