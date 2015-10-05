@@ -1,14 +1,15 @@
-var _           = require('lodash');
-var gulp        = require('gulp');
-var sass        = require('gulp-sass');
-var gutil       = require('gulp-util');
-var livereload  = require('gulp-livereload');
-var rev         = require('gulp-rev');
-var revReplace  = require('gulp-rev-replace');
-var stream      = require('webpack-stream');
-var rename      = require('gulp-rename');
-//var debug     = require('gulp-debug');
-var sequence    = require('run-sequence');
+var _          = require('lodash');
+var gulp       = require('gulp');
+var sass       = require('gulp-sass');
+var gutil      = require('gulp-util');
+var livereload = require('gulp-livereload');
+var rev        = require('gulp-rev');
+var revReplace = require('gulp-rev-replace');
+var stream     = require('webpack-stream');
+var rename     = require('gulp-rename');
+//var debug    = require('gulp-debug');
+var sequence   = require('run-sequence');
+var sourcemaps = require('gulp-sourcemaps');
 
 var path             = require('path');
 var webpack          = require('webpack');
@@ -46,8 +47,10 @@ gulp.task('assets:production', function(){
 
 gulp.task('css:development', function () {
   return gulp.src(STYLESHEET_FILES, {base: BASE})
-    .pipe(sass()
+    .pipe(sourcemaps.init())
+    .pipe(sass({sourceMapContents: true})
        .on('error', sass.logError))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(OUTPUT_FOLDER))
     .pipe(livereload());
 });
