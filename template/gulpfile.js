@@ -1,21 +1,28 @@
-var _          = require('lodash');
-var gulp       = require('gulp');
-var sass       = require('gulp-sass');
-var gutil      = require('gulp-util');
-var livereload = require('gulp-livereload');
-var rev        = require('gulp-rev');
-var revReplace = require('gulp-rev-replace');
-var stream     = require('webpack-stream');
-var rename     = require('gulp-rename');
-//var debug    = require('gulp-debug');
-var sequence   = require('run-sequence');
-var sourcemaps = require('gulp-sourcemaps');
+var _            = require('lodash');
+var gulp         = require('gulp');
+var sass         = require('gulp-sass');
+var gutil        = require('gulp-util');
+var livereload   = require('gulp-livereload');
+var rev          = require('gulp-rev');
+var revReplace   = require('gulp-rev-replace');
+var stream       = require('webpack-stream');
+var rename       = require('gulp-rename');
+//var debug      = require('gulp-debug');
+var sequence     = require('run-sequence');
+var postcss      = require('gulp-postcss');
+var autoprefixer = require('autoprefixer');
+var mqpacker     = require('css-mqpacker');
+var csswring     = require('csswring');
+var sourcemaps   = require('gulp-sourcemaps');
 
 var path             = require('path');
 var webpack          = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var webpackConfig    = require('./webpack.common.config');
 var webpackConfigHot = require('./webpack.hot.config');
+
+var postProcessorsDev   = [autoprefixer({browsers: ['last 3 version']})];
+var postProcessors   = [autoprefixer({browsers: ['last 3 version']}), mqpacker, csswring];
 
 var BASE             = 'frontend/';
 var ASSET_FILES      = 'frontend/assets/**/*';
@@ -50,6 +57,7 @@ gulp.task('css:development', function () {
     .pipe(sourcemaps.init())
     .pipe(sass({sourceMapContents: true})
        .on('error', sass.logError))
+    .pipe(postcss(postProcessorsDev))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(OUTPUT_FOLDER))
     .pipe(livereload());
@@ -59,6 +67,7 @@ gulp.task('css:production', function () {
   return gulp.src(STYLESHEET_FILES, {base: BASE})
     .pipe(sass()
        .on('error', sass.logError))
+    .pipe(postcss(postProcessors))
     .pipe(replace())
     .pipe(gulp.dest(OUTPUT_FOLDER))
     .pipe(rev())
@@ -110,4 +119,6 @@ gulp.task('precompile', function(cb){
     cb
   );
 });
+
+
 
