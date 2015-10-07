@@ -95,3 +95,24 @@ used for example to change the `media` attribute for a stylesheet.
  - `public/assets/javscripts/main.js` Output File
  -  `<script src="<%=gulp_asset_path('javascripts/main.js')%>"></script>`
  - `<%= gulp_javascript "main" %>` or `<%= gulp_javascript %>` also generate correct links
+
+## Development
+
+To test while changing the JS files, run
+
+```shell
+./cli create_testapp
+```
+
+inside the root of the gem. This will generate a testapp directory that
+contains a Rails app using the gem from source. All the gulp_assets
+specific files are symlinked to the files and directories in the template
+directory. If you want to use npm commands you have to run those inside
+the template directory, otherwise npm will replace the symlink with a
+new package.json.
+
+The rails app has the following features:
+
+- A layout requiring `main.js` and `main.css`.
+- A default route rendering a static template in
+  `app/views/application/index.html.erb`
