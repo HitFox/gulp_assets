@@ -22,7 +22,11 @@ hot.devServer = {
   contentBase: './public',
   publicPath: '/assets/javascripts',
   hot: true,
-  colors: true
+  colors: true,
+  headers: {
+    'Access-Control-Allow-Origin': '*'
+  }
 };
+
 
 module.exports = hot;
