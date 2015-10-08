@@ -1,7 +1,7 @@
 namespace :gulp_assets do
   desc "Compile Gulp Assets"
   task :precompile do
-    sh "gulp precompile"
+    sh "$(npm bin)/gulp precompile"
   end
 end
 
