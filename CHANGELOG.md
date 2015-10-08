@@ -2,6 +2,8 @@
 
 ## Unreleased: 1.0.0
 
+- Fix precompile task  
+  This would fail before if gulp was not in your PATH
 - Add CORS support to the webpack-dev-server  
   To prevent issues with the loading of fonts and scripts from the
   localhost:8080 origin through the page served from rails at the
