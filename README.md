@@ -11,7 +11,7 @@ workflow.
   Livereload client into Rails-renderd pages, updates are triggered from
   gulp.
 
-## Usage
+## Installation
 
 1. Add `gem 'gulp_assets'` to your Gemfile and run `bundle install`.
 2. Run `rails generate gulp_assets` to generate all necessary files.
@@ -116,3 +116,5 @@ The rails app has the following features:
 - A layout requiring `main.js` and `main.css`.
 - A default route rendering a static template in
   `app/views/application/index.html.erb`
+
+# Changelog
