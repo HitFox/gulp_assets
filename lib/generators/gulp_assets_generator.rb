@@ -5,6 +5,7 @@ class GulpAssetsGenerator < Rails::Generators::Base
   def create_frontend_folder
     directory 'frontend'
     copy_file ".eslintrc"
+    copy_file ".babelrc"
   end
 
   def create_webpack_config
