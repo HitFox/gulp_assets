@@ -118,3 +118,5 @@ The rails app has the following features:
   `app/views/application/index.html.erb`
 
 # Changelog
+
+See CHANGELOG.md
