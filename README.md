@@ -117,6 +117,26 @@ The rails app has the following features:
 - A default route rendering a static template in
   `app/views/application/index.html.erb`
 
+## Configuration
+
+The generator is only supposed to generate a scaffold. Afterwards modify
+the generated Javascript files at will.
+
+To tinker with the Rails bits, have a look at the `railtie.rb` file for
+available configuration options and initializers. If you need to
+reconfigure livereload (might be necessary in docker dev-environments where
+the livereload server is running on a different host than the rails
+server), put this initializer in your `application.rb`:
+
+```ruby
+initializer "config_livereload", after: 'gulp_assets.livereload' do
+  if Rails.env.development?
+    config.middleware.delete(Rack::LiveReload)
+    config.middleware.insert_after(ActionDispatch::Static, Rack::LiveReload, host: 'localhost')
+  end
+end
+```
+
 # Changelog
 
 See CHANGELOG.md
