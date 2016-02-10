@@ -91,8 +91,8 @@ used for example to change the `media` attribute for a stylesheet.
 
 ### JS
 
- - `frontend/javscripts/main.js` Input file
- - `public/assets/javscripts/main.js` Output File
+ - `frontend/javascripts/main.js` Input file
+ - `public/assets/javascripts/main.js` Output File
  -  `<script src="<%=gulp_asset_path('javascripts/main.js')%>"></script>`
  - `<%= gulp_javascript "main" %>` or `<%= gulp_javascript %>` also generate correct links
 
